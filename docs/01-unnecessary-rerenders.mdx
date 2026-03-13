@@ -1,0 +1,54 @@
+# 01 — Unnecessary Re-renders
+
+## What is happening
+
+This component renders a list of items and allows the user to interact with each one. Open the app, interact with the list, and watch what happens in the React Developer Tools Profiler.
+
+## Hints
+
+- Not every component in the tree needs to re-render when the parent updates
+- React has a way to tell a component to skip re-rendering when its props have not changed
+- Functions and objects created inline in the parent get a new reference on every render
+
+## The problem
+
+```tsx
+import { useState } from 'react'
+
+import type { listItemProps } from '../../types/ListItemProps'
+import { items } from '../../mocks/items'
+
+function ListItem({ item, onSelect, selected }: listItemProps) {
+  return (
+    <div>
+      <span>{item.name}</span>
+      <button onClick={() => onSelect(item.id)}>
+        {selected ? 'Selected' : 'Not selected'}
+      </button>
+    </div>
+  )
+}
+
+export default function UnnecessaryRerenders() {
+  const [selectedId, setSelectedId] = useState<number | null>(null)
+  return (
+    <div>
+      <h1>Unnecessary Re-renders</h1>
+      {items.map((item) => (
+        <ListItem
+          key={item.id}
+          item={item}
+          onSelect={setSelectedId}
+          selected={selectedId === item.id}
+        />
+      ))}
+    </div>
+  )
+}
+```
+
+## References
+
+- [react.dev/reference/react/memo](https://react.dev/reference/react/memo)
+- [react.dev/reference/react/useCallback](https://react.dev/reference/react/useCallback)
+- [debugbear.com/blog/measuring-react-app-performance](https://www.debugbear.com/blog/measuring-react-app-performance)
