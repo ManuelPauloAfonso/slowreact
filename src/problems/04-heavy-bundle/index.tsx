@@ -1,3 +1,3 @@
 export default function HeavyBundle() {
-  return <h1>Heavy Bundle</h1>;
+  return <h1>Heavy Bundle</h1>
 }

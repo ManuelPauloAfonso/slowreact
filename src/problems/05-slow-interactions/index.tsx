@@ -1,3 +1,3 @@
 export default function SlowInteractions() {
-  return <h1>Slow Interactions</h1>;
+  return <h1>Slow Interactions</h1>
 }

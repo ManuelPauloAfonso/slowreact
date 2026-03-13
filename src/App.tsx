@@ -1,4 +1,4 @@
-import "./App.css";
+import './App.css'
 
 function App() {
   return (
@@ -6,7 +6,7 @@ function App() {
       <h1>Slow React</h1>
       <p> React performance problems for you to solve</p>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
