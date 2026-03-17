@@ -20,6 +20,7 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    ignores: ['src/components/ui/**'],
   },
   prettier,
 ])

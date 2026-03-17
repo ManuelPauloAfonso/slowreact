@@ -19,12 +19,12 @@ const guide = [
 ]
 
 const exercises = [
-  { path: '/docs/01', label: 'Unnecessary Re-renders' },
-  { path: '/docs/02', label: 'Bad State Placement' },
-  { path: '/docs/03', label: 'List Virtualization' },
-  { path: '/docs/04', label: 'Heavy Bundle' },
-  { path: '/docs/05', label: 'Slow Interactions' },
-  { path: '/docs/06', label: 'Costly Hydration' },
+  { path: '/docs/01-unnecessary-rerenders', label: 'Unnecessary Re-renders' },
+  { path: '/docs/02-bad-state-placement', label: 'Bad State Placement' },
+  { path: '/docs/03-list-virtualization', label: 'List Virtualization' },
+  { path: '/docs/04-heavy-bundle', label: 'Heavy Bundle' },
+  { path: '/docs/05-slow-interactions', label: 'Slow Interactions' },
+  { path: '/docs/06-costly-hydration', label: 'Costly Hydration' },
 ]
 
 export function AppSidebar() {
@@ -39,7 +39,7 @@ export function AppSidebar() {
     <Sidebar className="w-80">
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-2">
-          <span className="font-semibold text-2xl text-[#FF7A37]">
+          <span className="font-mono font-bold text-2xl tracking-tight text-[#FF7A37]">
             Slow React
           </span>
         </div>
@@ -47,12 +47,17 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Guide</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-mono text-[10px] uppercase tracking-[0.18em]">
+            Guide
+          </SidebarGroupLabel>
           <SidebarMenu>
             {guide.map((item) => (
               <SidebarMenuItem key={item.path}>
                 <SidebarMenuButton asChild>
-                  <Link to={item.path} className="flex items-center gap-2">
+                  <Link
+                    to={item.path}
+                    className="flex items-center gap-2 font-mono text-sm"
+                  >
                     <item.icon className="size-4" />
                     {item.label}
                   </Link>
@@ -63,12 +68,16 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Exercises</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-mono text-[10px] uppercase tracking-[0.18em]">
+            Exercises
+          </SidebarGroupLabel>
           <SidebarMenu>
             {exercises.map((ex) => (
               <SidebarMenuItem key={ex.path}>
                 <SidebarMenuButton asChild>
-                  <Link to={ex.path}>{ex.label}</Link>
+                  <Link to={ex.path} className="font-mono text-sm">
+                    {ex.label}
+                  </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
             ))}

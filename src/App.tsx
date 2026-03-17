@@ -6,29 +6,39 @@ import {
   createRootRoute,
   createRoute,
 } from '@tanstack/react-router'
+import type { FC } from 'react'
 
-import GettingStarted from '../docs/getting-started.mdx'
-import Doc01 from '../docs/01-unnecessary-rerenders.mdx'
 import { DocsLayout } from './layouts/DocsLayout'
+import Home from '../docs/home/index.mdx'
 
 const rootRoute = createRootRoute({
   component: DocsLayout,
 })
 
-const gettingStartedRoute = createRoute({
+const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: () => <GettingStarted />,
+  component: () => <Home />,
 })
 
-const doc01Route = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/docs/01',
-  component: () => <Doc01 />,
-})
+const docModules = import.meta.glob('../docs/**/*.mdx', {
+  eager: true,
+}) as Record<string, { default: FC }>
+
+const docRoutes = Object.entries(docModules)
+  .filter(([path]) => !path.includes('/home/'))
+  .map(([path, mod]) => {
+    const slug = path.replace('../docs/', '').replace('.mdx', '')
+    const Component = mod.default
+    return createRoute({
+      getParentRoute: () => rootRoute,
+      path: `/docs/${slug}`,
+      component: () => <Component />,
+    })
+  })
 
 const router = createRouter({
-  routeTree: rootRoute.addChildren([gettingStartedRoute, doc01Route]),
+  routeTree: rootRoute.addChildren([indexRoute, ...docRoutes]),
 })
 
 export default function App() {

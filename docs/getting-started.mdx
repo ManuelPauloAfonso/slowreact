@@ -1,30 +1,127 @@
-# Getting Started
+import { Link } from '@tanstack/react-router'
 
-## What is Slow React?
+<div className="max-w-3xl mx-auto px-12 py-10">
 
-A collection of React performance problems for you to diagnose and fix using React Developer Tools.
+<div className="border-b border-border pb-8 mb-8">
+  <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-orange-500 mb-3">
+    Guide
+  </p>
+  <h1 className="font-mono text-3xl font-medium tracking-tight text-foreground mb-2">
+    Getting Started
+  </h1>
+  <p className="font-sans text-sm text-muted-foreground leading-relaxed max-w-lg text-center mx-auto">
+    A collection of React performance problems for you to diagnose and fix using
+    React Developer Tools.
+  </p>
+</div>
 
-## Prerequisites
+<div className="mb-8">
+  <div className="flex items-center gap-2 mb-4">
+    <span className="font-mono text-[11px] text-muted-foreground/40">##</span>
+    <h2 className="font-mono text-[13px] font-medium text-foreground">
+      Prerequisites
+    </h2>
+  </div>
+  <ul className="flex flex-col gap-2">
+    {[
+      'Basic knowledge of React',
+      'React Developer Tools installed in your browser',
+      'Node.js installed',
+    ].map((item) => (
+      <li
+        key={item}
+        className="flex items-center gap-3 font-sans text-sm text-muted-foreground"
+      >
+        <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+        {item}
+      </li>
+    ))}
+  </ul>
+</div>
 
-- Basic knowledge of React
-- React Developer Tools installed in your browser
-- Node.js installed
+<div className="mb-8">
+  <div className="flex items-center gap-2 mb-4">
+    <span className="font-mono text-[11px] text-muted-foreground/40">##</span>
+    <h2 className="font-mono text-[13px] font-medium text-foreground">
+      How it works
+    </h2>
+  </div>
+  <div className="flex flex-col">
+    {[
+      'Open the app and interact with it',
+      'Open React DevTools → Profiler tab',
+      'Record and identify the problem',
+      'Fix it using the hints provided',
+    ].map((item, i, arr) => (
+      <div key={i} className="flex gap-4 relative pb-5 last:pb-0">
+        {i < arr.length - 1 && (
+          <div className="absolute left-[13px] top-7 bottom-0 w-px bg-border" />
+        )}
+        <div className="w-7 h-7 rounded-full border border-orange-500/30 bg-orange-500/10 flex items-center justify-center font-mono text-[11px] text-orange-500 flex-shrink-0">
+          {i + 1}
+        </div>
+        <p className="font-sans text-sm text-muted-foreground pt-1.5 leading-relaxed">
+          {item}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
 
-## How it works
+<div className="mb-8">
+  <div className="flex items-center gap-2 mb-4">
+    <span className="font-mono text-[11px] text-muted-foreground/40">##</span>
+    <h2 className="font-mono text-[13px] font-medium text-foreground">
+      Tools you'll need
+    </h2>
+  </div>
+  <div className="grid grid-cols-3 gap-3">
+    {[
+      {
+        name: 'React DevTools',
+        desc: 'Profile components and find re-renders',
+      },
+      { name: 'Chrome DevTools', desc: 'Performance tab for deeper analysis' },
+      { name: 'Your editor', desc: 'To apply the fix' },
+    ].map((tool) => (
+      <div
+        key={tool.name}
+        className="bg-muted/50 border border-border rounded-lg p-4"
+      >
+        <div className="w-7 h-7 rounded-md bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 mb-3">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
+            <path d="M4 4l4 4-4 4" />
+            <line x1="9" y1="12" x2="13" y2="12" />
+          </svg>
+        </div>
+        <p className="font-mono text-[11px] font-medium text-foreground mb-1">
+          {tool.name}
+        </p>
+        <p className="font-sans text-[11px] text-muted-foreground leading-relaxed">
+          {tool.desc}
+        </p>
+      </div>
+    ))}
+  </div>
+</div>
 
-Each exercise contains a component with a real performance problem. Your job is to:
+<div className="mt-10 pt-6 border-t border-border flex items-center justify-between">
+  <p className="font-sans text-sm text-muted-foreground">
+    Ready? Start with exercise 01.
+  </p>
+  <Link
+    to="/docs/01-unnecessary-rerenders"
+    className="bg-orange-500 hover:bg-orange-600 text-white font-mono text-xs font-medium px-4 py-2 rounded-md transition-colors flex items-center gap-2 no-underline"
+  >
+    Start exercise 01 →
+  </Link>
+</div>
 
-1. Open the app and interact with it
-2. Open React DevTools → Profiler tab
-3. Record and identify the problem
-4. Fix it using the hints provided
-
-## Tools you'll need
-
-- **React DevTools** — to profile components and find re-renders
-- **Chrome DevTools** — Performance tab for deeper analysis
-- **Your editor** — to apply the fix
-
-## Exercises
-
-Start with the first exercise and work your way through. Each one builds on concepts from the previous.
+</div>

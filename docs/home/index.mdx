@@ -1,0 +1,142 @@
+import { ExerciseCard } from '@/components/ExerciseCard'
+import { HeroMetric } from '@/components/HeroMetric'
+import { Button } from '@/components/ui/button'
+
+export const exercises = [
+  {
+    num: '01',
+    title: 'Unnecessary Re-renders',
+    desc: 'Components re-rendering without reason. Learn to identify and fix with memo, useCallback and proper state structure.',
+    tag: 'performance',
+    href: '/docs/01-unnecessary-rerenders',
+  },
+  {
+    num: '02',
+    title: 'Bad State Placement',
+    desc: 'State placed too high in the tree causes cascading re-renders. Colocation solves it in most cases.',
+    tag: 'state',
+    href: '/docs/02-bad-state-placement',
+  },
+  {
+    num: '03',
+    title: 'List Virtualization',
+    desc: 'Rendering 10,000 items at once freezes the browser. Virtualization renders only what is visible in the viewport.',
+    tag: 'performance',
+    href: '/docs/03-list-virtualization',
+  },
+  {
+    num: '04',
+    title: 'Heavy Bundle',
+    desc: 'A large bundle delays the first load. Code splitting and lazy loading fix it without sacrificing DX.',
+    tag: 'bundle',
+    href: '/docs/04-heavy-bundle',
+  },
+  {
+    num: '05',
+    title: 'Slow Interactions',
+    desc: 'Inputs freezing? Heavy computations on the main thread block the UI. useDeferredValue and web workers help.',
+    tag: 'performance',
+    href: '/docs/05-slow-interactions',
+  },
+  {
+    num: '06',
+    title: 'Costly Hydration',
+    desc: 'SSR does not guarantee speed. Poor hydration delays TTI. Selective hydration changes everything.',
+    tag: 'ssr',
+    href: '/docs/06-costly-hydration',
+  },
+]
+
+<section className="not-prose relative overflow-hidden border-b border-border px-8 pb-16 pt-20 md:px-16">
+  <span
+    aria-hidden
+    className="pointer-events-none absolute -right-4 top-4 select-none font-mono text-[10rem] font-black leading-none tracking-tighter text-foreground/[0.04]"
+  >
+    slow
+  </span>
+
+<p className="font-mono text-[11px] uppercase tracking-[0.18em] text-orange-500 mb-6">
+  React Performance
+</p>
+
+<h1 className="font-mono text-5xl font-extrabold leading-[1.05] tracking-tight mb-6 md:text-6xl">
+  Find the <span className="text-orange-500">bottleneck.</span>
+  <br />
+  Fix it.
+</h1>
+
+<p className="font-sans text-base text-muted-foreground leading-relaxed max-w-lg mb-10 mx-auto">
+  Hands on exercises to diagnose and fix the most common performance problems in
+  React apps — from unnecessary re-renders to costly hydration.
+</p>
+
+  <Button
+    asChild
+    className="bg-orange-500 hover:bg-orange-600 text-white font-mono font-semibold gap-2"
+  >
+    <a href="/docs/getting-started">
+      Get started <span aria-hidden>→</span>
+    </a>
+  </Button>
+</section>
+
+<section className="not-prose grid grid-cols-3 divide-x divide-border border-b border-border">
+  <HeroMetric value="6" label="interactive exercises" />
+  <HeroMetric value="~2h" label="to complete everything" />
+  <HeroMetric value="real" label="real-world problems" />
+</section>
+
+<section className="not-prose px-8 py-14 md:px-16 border-b border-border">
+  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/40 mb-8">
+    Why this exists
+  </p>
+
+  <div className="max-w-2xl space-y-6 mx-auto">
+    <p className="font-sans text-base text-foreground leading-relaxed">
+      I created this repository as a personal way to practice React performance
+      topics that have come up in technical interviews. The inspiration came from
+      the article
+      <a
+        href="https://www.debugbear.com/blog/measuring-react-app-performance"
+        className="text-orange-500 hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        How to Measure and Optimize React Performance
+      </a>
+      by Anna Monus, from which I learned a lot. If you haven't read it, start there.
+    </p>
+
+    <p className="font-sans text-base text-muted-foreground leading-relaxed">
+      Most React performance content shows you the solution. This project shows
+      you the problem and lets you figure out the rest. The goal is to build
+      muscle memory for spotting performance issues in real codebases.
+    </p>
+
+    <div className="border-l-2 border-orange-500 pl-5 py-1">
+      <p className="font-mono text-[11px] uppercase tracking-wider text-orange-500 mb-2">
+        The Pokémon analogy
+      </p>
+      <p className="font-sans text-sm text-muted-foreground leading-relaxed">
+        Each exercise is a wild encounter. The component has a real performance
+        problem — your job is to open React DevTools, profile it, and catch the
+        issue before it escapes. Just like a Pokémon trainer doesn't memorize
+        every move — they learn to read the battle — a good React developer
+        doesn't memorize every optimization. They learn to spot the pattern.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<section className="not-prose px-8 py-12 md:px-16">
+  <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground/40 mb-8">
+    Exercises
+  </p>
+
+  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    {exercises.map((ex) => (
+      <ExerciseCard key={ex.num} {...ex} />
+    ))}
+  </div>
+</section>

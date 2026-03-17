@@ -7,7 +7,7 @@ export function DocsLayout() {
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <main className="flex-1 px-12 py-10 max-w-4xl w-full mx-auto prose prose-neutral dark:prose-invert prose-headings:text-left prose-p:text-left prose-li:text-left">
+        <main className="flex-1 w-full">
           <Outlet />
         </main>
       </SidebarInset>
