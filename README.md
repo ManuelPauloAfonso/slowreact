@@ -10,6 +10,21 @@ I created this repository as a personal way to practice React performance topics
 
 Most React performance content shows you the solution. This project shows you the problem and lets you figure out the rest. The goal is to build muscle memory for spotting performance issues in real codebases.
 
+## The Pokémon analogy
+
+Each exercise is a wild encounter. The component has a real performance problem — your job is to open React DevTools, profile it, and catch the issue before it escapes.
+
+Just like a Pokémon trainer doesn't memorize every move — they learn to read the battle — a good React developer doesn't memorize every optimization. They learn to spot the pattern.
+
+| Pokémon        | Problem                | Why                                            |
+| -------------- | ---------------------- | ---------------------------------------------- |
+| Magikarp       | Unnecessary Re-renders | Lots of effort, zero result                    |
+| Bill's PC      | List Virtualization    | Stores hundreds, shows only the current box    |
+| HM Slave       | Bad State Placement    | Pollutes the move set of whoever holds it      |
+| Pokédex        | Heavy Bundle           | Don't load all 1010 before showing the first   |
+| Quick Claw     | Slow Interactions      | Prioritizes who needs to move first            |
+| Corrupted Save | Costly Hydration       | 30 seconds to load a game you already finished |
+
 ## Problems
 
 | #   | Problem                | Concept                         |
@@ -24,7 +39,7 @@ Most React performance content shows you the solution. This project shows you th
 ## Getting started
 
 ```bash
-git clone https://github.com/your-username/slow-react
+git clone git@github.com:ManuelPauloAfonso/slowreact.git
 cd slow-react
 pnpm install
 pnpm dev
