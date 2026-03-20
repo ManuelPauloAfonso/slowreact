@@ -3,6 +3,9 @@
 A collection of real React performance problems for you to solve.
 
 Each problem is intentionally written with bad practices. Your job is to identify what is wrong and fix it using React best practices.
+<a alt="Slow React logo" href="https://slowreact.vercel.app/" target="_blank" rel="noreferrer">
+<img align="center" width="100%" src="./public/images/logotipo.png"/>
+</a>
 
 ## Motivation
 
@@ -24,6 +27,21 @@ Just like a Pokémon trainer doesn't memorize every move — they learn to read 
 | Pokédex        | Heavy Bundle           | Don't load all 1010 before showing the first   |
 | Quick Claw     | Slow Interactions      | Prioritizes who needs to move first            |
 | Corrupted Save | Costly Hydration       | 30 seconds to load a game you already finished |
+
+> 💡 **Want to contribute?** You don't have to use Pokémon. The analogy can be anything — cooking, sports, movies, music — as long as it makes the performance problem click for someone who has never heard of React. If you can explain it to a non-developer, it belongs here.
+
+---
+
+## How the challenge works
+
+## How it works
+
+1. **Read the docs** — start at [slowreact.vercel.app](https://slowreact.vercel.app/) to understand the context of each exercise.
+2. **Clone the repository** — get the code running locally.
+3. **Open the exercise folder** — each problem has its own `README.md` with a detailed explanation of the issue, what to look for, and references to help you solve it.
+4. **Fix the problem** — no spoilers in the code. The solution is yours to find.
+
+That's it. No magic, no hand-holding.
 
 ## Problems
 

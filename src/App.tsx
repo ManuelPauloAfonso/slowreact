@@ -29,6 +29,7 @@ const docRoutes = Object.entries(docModules)
   .filter(([path]) => !path.includes('/home/'))
   .map(([path, mod]) => {
     const slug = path.replace('../docs/', '').replace('.mdx', '')
+    console.log('📄 file:', path, '→ route:', `/docs/${slug}`)
     const Component = mod.default
     return createRoute({
       getParentRoute: () => rootRoute,
