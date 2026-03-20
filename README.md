@@ -34,8 +34,6 @@ Just like a Pokémon trainer doesn't memorize every move they learn to read the 
 
 ## How the challenge works
 
-## How it works
-
 1. **Read the docs** start at [slowreact.vercel.app](https://slowreact.vercel.app/) to understand the context of each exercise.
 2. **Clone the repository** get the code running locally.
 3. **Open the exercise folder** each problem has its own `README.md` with a detailed explanation of the issue, what to look for, and references to help you solve it.
