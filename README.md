@@ -36,12 +36,10 @@ Just like a Pokémon trainer doesn't memorize every move — they learn to read 
 
 ## How it works
 
-1. **Read the docs** — start at [slowreact.vercel.app](https://slowreact.vercel.app/) to understand the context of each exercise.
-2. **Clone the repository** — get the code running locally.
-3. **Open the exercise folder** — each problem has its own `README.md` with a detailed explanation of the issue, what to look for, and references to help you solve it.
-4. **Fix the problem** — no spoilers in the code. The solution is yours to find.
-
-That's it. No magic, no hand-holding.
+1. **Read the docs** start at [slowreact.vercel.app](https://slowreact.vercel.app/) to understand the context of each exercise.
+2. **Clone the repository** get the code running locally.
+3. **Open the exercise folder** each problem has its own `README.md` with a detailed explanation of the issue, what to look for, and references to help you solve it.
+4. **Fix the problem** no spoilers in the code. The solution is yours to find.
 
 ## Problems
 
