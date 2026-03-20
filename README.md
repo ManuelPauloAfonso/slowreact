@@ -15,9 +15,9 @@ Most React performance content shows you the solution. This project shows you th
 
 ## The Pokémon analogy
 
-Each exercise is a wild encounter. The component has a real performance problem — your job is to open React DevTools, profile it, and catch the issue before it escapes.
+Each exercise is a wild encounter. The component has a real performance problem your job is to open React DevTools, profile it, and catch the issue before it escapes.
 
-Just like a Pokémon trainer doesn't memorize every move — they learn to read the battle — a good React developer doesn't memorize every optimization. They learn to spot the pattern.
+Just like a Pokémon trainer doesn't memorize every move they learn to read the battle.
 
 | Pokémon        | Problem                | Why                                            |
 | -------------- | ---------------------- | ---------------------------------------------- |
@@ -28,7 +28,7 @@ Just like a Pokémon trainer doesn't memorize every move — they learn to read 
 | Quick Claw     | Slow Interactions      | Prioritizes who needs to move first            |
 | Corrupted Save | Costly Hydration       | 30 seconds to load a game you already finished |
 
-> 💡 **Want to contribute?** You don't have to use Pokémon. The analogy can be anything — cooking, sports, movies, music — as long as it makes the performance problem click for someone who has never heard of React. If you can explain it to a non-developer, it belongs here.
+> 💡 **Want to contribute?** You don't have to use Pokémon. The analogy can be anything cooking, sports, movies, music as long as it makes the performance problem click for someone who has never heard of React. If you can explain it to a non developer, it belongs here How would you explain it to someone who is just getting started?.
 
 ---
 
