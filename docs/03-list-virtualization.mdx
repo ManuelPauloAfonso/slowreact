@@ -27,77 +27,74 @@ export const meta = {
     Field Notes — Prof. Oak
   </p>
   <p className="font-sans text-sm text-muted-foreground italic leading-relaxed">
-    "Magikarp uses Splash! But nothing happened... A component re-rendered 47
-    times on a single keystroke. Wild performance issues appeared!"
+    "Bill's PC stores hundreds of Pokémon but it only shows you the current box.
+    Rendering all 1,000 items at once is like opening every box simultaneously.
+    The system slows to a crawl."
   </p>
 </div>
 
 ## What is happening
 
-This component renders a list of items and allows the user to interact with each
-one. Open the app, interact with the list, and watch what happens in the React
-Developer Tools Profiler.
+This component renders a list of 1,000 items using a standard `.map()`. The
+browser mounts every DOM node at once including the ones that are completely
+off-screen. Scroll through the list and open the Performance tab in Chrome
+DevTools to see the impact.
 
 ## Hints
 
-- Not every component in the tree needs to re-render when the parent updates
-- React has a way to tell a component to skip re-rendering when its props have not changed
-- Functions and objects created inline in the parent get a new reference on every render
+- The browser renders every item in the list, even the ones you can't see
+- List virtualization only renders the items visible in the viewport
+- `react-window` handles this without scroll jank or memory leaks
+- Only virtualize if profiling confirms the list is the bottleneck
 
 <div className="not-prose my-6 bg-muted/50 border border-border rounded-lg p-4">
   <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40 mb-2">
-    Pokédex #025 — React.memo
+    Pokédex react-window
   </p>
   <p className="font-sans text-sm text-muted-foreground leading-relaxed">
-    When this Pokémon detects that its props haven't changed, it skips the
-    render entirely. Effective against unnecessary re-render attacks.
+    This Pokémon only renders what fits in the current box. The rest wait
+    patiently in storage until they are needed.
   </p>
 </div>
 
 ## The problem
 
 ```tsx
-import { useState } from 'react'
-import type { listItemProps } from '../../types/ListItemProps'
-import { items } from '../../mocks/items'
-
-function ListItem({ item, onSelect, selected }: listItemProps) {
-  return (
-    <div>
-      <span>{item.name}</span>
-      <button onClick={() => onSelect(item.id)}>
-        {selected ? 'Selected' : 'Not selected'}
-      </button>
-    </div>
-  )
+interface Item {
+  id: number
+  name: string
 }
 
-export default function UnnecessaryRerenders() {
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+interface Props {
+  items: Item[]
+}
+
+export default function ListVirtualization({ items }: Props) {
   return (
-    <div>
-      <h1>Unnecessary Re-renders</h1>
+    <ul>
       {items.map((item) => (
-        <ListItem
-          key={item.id}
-          item={item}
-          onSelect={setSelectedId}
-          selected={selectedId === item.id}
-        />
+        <li key={item.id} style={{ height: 50 }}>
+          {item.name}
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }
 ```
 
 ## References
 
-- [react.dev/reference/react/memo](https://react.dev/reference/react/memo)
-- [react.dev/reference/react/useCallback](https://react.dev/reference/react/useCallback)
+- [react-window.vercel.app](https://react-window.vercel.app)
+- [web.dev/articles/virtualize-long-lists-react-window](https://web.dev/articles/virtualize-long-lists-react-window)
 - [debugbear.com/blog/measuring-react-app-performance](https://www.debugbear.com/blog/measuring-react-app-performance)
 
 <div className="not-prose mt-12 pt-6 border-t border-border flex items-center justify-between">
-  <span className="font-sans text-sm text-muted-foreground/40">← Previous</span>
+  <a
+    href="/docs/02-bad-state-placement"
+    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors no-underline"
+  >
+    ← 02 Bad State Placement
+  </a>
   <a
     href="/docs/04-heavy-bundle"
     className="bg-orange-500 hover:bg-orange-600 text-white font-mono text-xs font-medium px-4 py-2 rounded-md transition-colors no-underline"

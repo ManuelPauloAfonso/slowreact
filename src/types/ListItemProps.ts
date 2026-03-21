@@ -1,7 +1,4 @@
-type Item = {
-  id: number
-  name: string
-}
+import type { Item } from './Item'
 
 export type listItemProps = {
   item: Item
