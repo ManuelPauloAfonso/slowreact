@@ -88,7 +88,7 @@ export function AppSidebar() {
       <SidebarFooter className="p-4">
         <div className="flex items-center justify-between">
           <a
-            href="https://github.com/ManuelPauloAfonso"
+            href="https://github.com/ManuelPauloAfonso/slowreact"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground transition-colors"

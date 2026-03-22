@@ -27,64 +27,56 @@ export const meta = {
     Field Notes — Prof. Oak
   </p>
   <p className="font-sans text-sm text-muted-foreground italic leading-relaxed">
-    "Magikarp uses Splash! But nothing happened... A component re-rendered 47
-    times on a single keystroke. Wild performance issues appeared!"
+    "The save file loaded — but the game was frozen for 30 seconds. The HTML
+    arrived, but the browser was still processing everything before the user
+    could interact. A corrupted hydration appeared!"
   </p>
 </div>
 
 ## What is happening
 
-This component renders a list of items and allows the user to interact with each
-one. Open the app, interact with the list, and watch what happens in the React
-Developer Tools Profiler.
+This component imports `HeavySection` directly, which means it gets bundled and
+loaded together with everything else on the initial page load. Open the Network
+tab in Chrome DevTools and reload the page — everything loads in a single
+chunk, even sections the user may never scroll to.
 
 ## Hints
 
-- Not every component in the tree needs to re-render when the parent updates
-- React has a way to tell a component to skip re-rendering when its props have not changed
-- Functions and objects created inline in the parent get a new reference on every render
+- Direct imports are always included in the main bundle
+- `lazy()` tells React to load a component only when it is needed
+- `<Suspense>` is required to wrap any lazy component — it shows a fallback while loading
+- Open the Network tab after applying the fix and look for a separate chunk
 
 <div className="not-prose my-6 bg-muted/50 border border-border rounded-lg p-4">
   <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40 mb-2">
-    Pokédex #025 — React.memo
+    Pokédex — lazy + Suspense
   </p>
   <p className="font-sans text-sm text-muted-foreground leading-relaxed">
-    When this Pokémon detects that its props haven't changed, it skips the
-    render entirely. Effective against unnecessary re-render attacks.
+    This Pokémon stays in its Poké Ball until the battle actually needs it.
+    Critical teammates take the field first — heavy ones stay benched until the
+    right moment.
   </p>
 </div>
 
 ## The problem
 
 ```tsx
-import { useState } from 'react'
-import type { listItemProps } from '../../types/ListItemProps'
-import { items } from '../../mocks/items'
+import HeavySection from './heavysection'
 
-function ListItem({ item, onSelect, selected }: listItemProps) {
-  return (
-    <div>
-      <span>{item.name}</span>
-      <button onClick={() => onSelect(item.id)}>
-        {selected ? 'Selected' : 'Not selected'}
-      </button>
-    </div>
-  )
+function AboveTheFold() {
+  return <div>Main content — visible immediately</div>
 }
 
-export default function UnnecessaryRerenders() {
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+function Sidebar() {
+  return <div>Sidebar content</div>
+}
+
+export default function CostlyHydration() {
   return (
     <div>
-      <h1>Unnecessary Re-renders</h1>
-      {items.map((item) => (
-        <ListItem
-          key={item.id}
-          item={item}
-          onSelect={setSelectedId}
-          selected={selectedId === item.id}
-        />
-      ))}
+      <AboveTheFold />
+      <HeavySection />
+      <Sidebar />
     </div>
   )
 }
@@ -92,18 +84,21 @@ export default function UnnecessaryRerenders() {
 
 ## References
 
-- [react.dev/reference/react/memo](https://react.dev/reference/react/memo)
-- [react.dev/reference/react/useCallback](https://react.dev/reference/react/useCallback)
+- [react.dev/reference/react/lazy](https://react.dev/reference/react/lazy)
+- [react.dev/reference/react/Suspense](https://react.dev/reference/react/Suspense)
+- [react.dev/blog/2022/03/29/react-v18#suspense-in-react-18](https://react.dev/blog/2022/03/29/react-v18#suspense-in-react-18)
 - [debugbear.com/blog/measuring-react-app-performance](https://www.debugbear.com/blog/measuring-react-app-performance)
 
 <div className="not-prose mt-12 pt-6 border-t border-border flex items-center justify-between">
-  <span className="font-sans text-sm text-muted-foreground/40">← Previous</span>
   <a
-    href="/docs/-the-next-exercise"
-    className="bg-orange-500 hover:bg-orange-600 text-white font-mono text-xs font-medium px-4 py-2 rounded-md transition-colors no-underline"
+    href="/docs/05-slow-interactions"
+    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors no-underline"
   >
-    Next exercise →
+    ← 05 Slow Interactions
   </a>
+  <span className="font-mono text-xs text-muted-foreground/40">
+    You finished all exercises
+  </span>
 </div>
 
 </DocContent>
