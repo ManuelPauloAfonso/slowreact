@@ -27,77 +27,75 @@ export const meta = {
     Field Notes — Prof. Oak
   </p>
   <p className="font-sans text-sm text-muted-foreground italic leading-relaxed">
-    "Magikarp uses Splash! But nothing happened... A component re-rendered 47
-    times on a single keystroke. Wild performance issues appeared!"
+    "The Pokédex loaded all 1,010 entries before showing the first one. The user
+    is still waiting. Don't load what you don't need."
   </p>
 </div>
 
 ## What is happening
 
-This component renders a list of items and allows the user to interact with each
-one. Open the app, interact with the list, and watch what happens in the React
-Developer Tools Profiler.
+This component imports `chart.js` using the default entry point, which registers
+every chart type, scale, and plugin — even the ones never used. Open Chrome
+DevTools, run a Lighthouse audit, and click View Treemap to see how much of the
+bundle comes from this single import.
 
 ## Hints
 
-- Not every component in the tree needs to re-render when the parent updates
-- React has a way to tell a component to skip re-rendering when its props have not changed
-- Functions and objects created inline in the parent get a new reference on every render
+- Importing from `chart.js/auto` loads everything, even unused chart types
+- Tree shaking only works when unused code is never imported in the first place
+- Import only the specific controllers, scales, and elements you need
+- Use Rollup Plugin Visualizer or Lighthouse Treemap to identify heavy dependencies
 
 <div className="not-prose my-6 bg-muted/50 border border-border rounded-lg p-4">
   <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40 mb-2">
-    Pokédex #025 — React.memo
+    Pokédex — Tree Shaking
   </p>
   <p className="font-sans text-sm text-muted-foreground leading-relaxed">
-    When this Pokémon detects that its props haven't changed, it skips the
-    render entirely. Effective against unnecessary re-render attacks.
+    This Pokémon only carries the moves it actually uses in battle. Dead weight
+    gets left at the PC before the journey starts.
   </p>
 </div>
 
 ## The problem
 
 ```tsx
-import { useState } from 'react'
-import type { listItemProps } from '../../types/ListItemProps'
-import { items } from '../../mocks/items'
+import Chart from 'chart.js/auto'
+import { useEffect, useRef } from 'react'
 
-function ListItem({ item, onSelect, selected }: listItemProps) {
-  return (
-    <div>
-      <span>{item.name}</span>
-      <button onClick={() => onSelect(item.id)}>
-        {selected ? 'Selected' : 'Not selected'}
-      </button>
-    </div>
-  )
-}
+export default function HeavyBundle() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
-export default function UnnecessaryRerenders() {
-  const [selectedId, setSelectedId] = useState<number | null>(null)
-  return (
-    <div>
-      <h1>Unnecessary Re-renders</h1>
-      {items.map((item) => (
-        <ListItem
-          key={item.id}
-          item={item}
-          onSelect={setSelectedId}
-          selected={selectedId === item.id}
-        />
-      ))}
-    </div>
-  )
+  useEffect(() => {
+    if (!canvasRef.current) return
+
+    const chart = new Chart(canvasRef.current, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar'],
+        datasets: [{ label: 'Sales', data: [10, 20, 30] }],
+      },
+    })
+
+    return () => chart.destroy()
+  }, [])
+
+  return <canvas ref={canvasRef} />
 }
 ```
 
 ## References
 
-- [react.dev/reference/react/memo](https://react.dev/reference/react/memo)
-- [react.dev/reference/react/useCallback](https://react.dev/reference/react/useCallback)
+- [bundlephobia.com/package/chart.js](https://bundlephobia.com/package/chart.js)
+- [web.dev/articles/reduce-javascript-payloads-with-tree-shaking](https://web.dev/articles/reduce-javascript-payloads-with-tree-shaking)
 - [debugbear.com/blog/measuring-react-app-performance](https://www.debugbear.com/blog/measuring-react-app-performance)
 
 <div className="not-prose mt-12 pt-6 border-t border-border flex items-center justify-between">
-  <span className="font-sans text-sm text-muted-foreground/40">← Previous</span>
+  <a
+    href="/docs/03-list-virtualization"
+    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors no-underline"
+  >
+    ← 03 List Virtualization
+  </a>
   <a
     href="/docs/05-slow-interactions"
     className="bg-orange-500 hover:bg-orange-600 text-white font-mono text-xs font-medium px-4 py-2 rounded-md transition-colors no-underline"

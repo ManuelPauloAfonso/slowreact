@@ -1,22 +1,22 @@
-# 01 - Heavy Bundle
+# 04 - Heavy Bundle
 
 ## What is happening
 
-This component renders a list of items and allows the user to interact with each one. Open the app, interact with the list, and watch what happens in the React Developer Tools Profiler.
+This component imports `chart.js` using the default entry point, which registers every chart type, scale, and plugin — even the ones never used. Open Chrome DevTools, run a Lighthouse audit, and click View Treemap to see how much of the bundle comes from this single import.
 
 ## What to look for
 
-Open React Developer Tools, go to the Profiler tab, click Record, interact with the list, and stop recording. Look at which components are rendering on each interaction and how many times they render.
+Run a Lighthouse audit in Chrome DevTools and click the View Treemap button. Look at how much of the bundle is occupied by `chart.js`. Then check how much of that code is actually used by the component.
 
 ## Hints
 
-- Not every component in the tree needs to re-render when the parent updates
-- React has a way to tell a component to skip re-rendering when its props have not changed
-- Functions and objects created inline in the parent get a new reference on every render
+- Importing from `chart.js/auto` loads everything, even unused chart types
+- Tree shaking only works when unused code is never imported in the first place
+- Import only the specific controllers, scales, and elements you need
+- Use Rollup Plugin Visualizer or Lighthouse Treemap to identify heavy dependencies
 
 ## References
 
-- https://react.dev/reference/react/memo
-- https://react.dev/reference/react/useMemo
-- https://react.dev/reference/react/useCallback
+- https://bundlephobia.com/package/chart.js
+- https://web.dev/articles/reduce-javascript-payloads-with-tree-shaking
 - https://www.debugbear.com/blog/measuring-react-app-performance
