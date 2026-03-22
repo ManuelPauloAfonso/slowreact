@@ -27,30 +27,32 @@ export const meta = {
     Field Notes — Prof. Oak
   </p>
   <p className="font-sans text-sm text-muted-foreground italic leading-relaxed">
-    "Magikarp uses Splash! But nothing happened... A component re-rendered 47
-    times on a single keystroke. Wild performance issues appeared!"
+    "Quick Claw activates! The input should move first but React gave every
+    update the same priority. The user is still waiting for the list to catch
+    up."
   </p>
 </div>
 
 ## What is happening
 
-This component renders a list of items and allows the user to interact with each
-one. Open the app, interact with the list, and watch what happens in the React
-Developer Tools Profiler.
+This component filters a large list on every keystroke. React processes the input
+update and the list re-render with the same priority, blocking the main thread
+until the filter completes. Type into the input and notice how it feels sluggish.
 
 ## Hints
 
-- Not every component in the tree needs to re-render when the parent updates
-- React has a way to tell a component to skip re-rendering when its props have not changed
-- Functions and objects created inline in the parent get a new reference on every render
+- React processes all state updates with the same priority by default
+- `useTransition` lets you mark the list update as non-urgent, keeping the input responsive
+- `useDeferredValue` is the right choice when the value comes from props instead of local state
+- The input update should always feel instant the list can wait
 
 <div className="not-prose my-6 bg-muted/50 border border-border rounded-lg p-4">
   <p className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground/40 mb-2">
-    Pokédex #025 — React.memo
+    Pokédex — useTransition
   </p>
   <p className="font-sans text-sm text-muted-foreground leading-relaxed">
-    When this Pokémon detects that its props haven't changed, it skips the
-    render entirely. Effective against unnecessary re-render attacks.
+    This Pokémon holds the Quick Claw. It always acts first urgent updates go
+    through immediately while the heavy work waits its turn.
   </p>
 </div>
 
@@ -58,33 +60,27 @@ Developer Tools Profiler.
 
 ```tsx
 import { useState } from 'react'
-import type { listItemProps } from '../../types/ListItemProps'
-import { items } from '../../mocks/items'
+import { items } from '@/mocks/items'
+import type { Item } from '@/types/Item'
 
-function ListItem({ item, onSelect, selected }: listItemProps) {
-  return (
-    <div>
-      <span>{item.name}</span>
-      <button onClick={() => onSelect(item.id)}>
-        {selected ? 'Selected' : 'Not selected'}
-      </button>
-    </div>
+export default function SlowInteractions() {
+  const [search, setSearch] = useState('')
+  const filtered: Item[] = items.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
   )
-}
 
-export default function UnnecessaryRerenders() {
-  const [selectedId, setSelectedId] = useState<number | null>(null)
   return (
     <div>
-      <h1>Unnecessary Re-renders</h1>
-      {items.map((item) => (
-        <ListItem
-          key={item.id}
-          item={item}
-          onSelect={setSelectedId}
-          selected={selectedId === item.id}
-        />
-      ))}
+      <input
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search..."
+      />
+      <ul>
+        {filtered.map((item) => (
+          <li key={item.id}>{item.name}</li>
+        ))}
+      </ul>
     </div>
   )
 }
@@ -92,12 +88,18 @@ export default function UnnecessaryRerenders() {
 
 ## References
 
-- [react.dev/reference/react/memo](https://react.dev/reference/react/memo)
-- [react.dev/reference/react/useCallback](https://react.dev/reference/react/useCallback)
+- [react.dev/reference/react/useTransition](https://react.dev/reference/react/useTransition)
+- [react.dev/reference/react/useDeferredValue](https://react.dev/reference/react/useDeferredValue)
+- [react.dev/blog/2022/03/29/react-v18#new-feature-transitions](https://react.dev/blog/2022/03/29/react-v18#new-feature-transitions)
 - [debugbear.com/blog/measuring-react-app-performance](https://www.debugbear.com/blog/measuring-react-app-performance)
 
 <div className="not-prose mt-12 pt-6 border-t border-border flex items-center justify-between">
-  <span className="font-sans text-sm text-muted-foreground/40">← Previous</span>
+  <a
+    href="/docs/04-heavy-bundle"
+    className="font-mono text-xs text-muted-foreground hover:text-foreground transition-colors no-underline"
+  >
+    ← 04 Heavy Bundle
+  </a>
   <a
     href="/docs/06-costly-hydration"
     className="bg-orange-500 hover:bg-orange-600 text-white font-mono text-xs font-medium px-4 py-2 rounded-md transition-colors no-underline"
