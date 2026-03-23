@@ -3,32 +3,32 @@ import { Link } from '@tanstack/react-router'
 
 const exercises = [
   {
-    path: '/01',
+    path: '/docs/01-unnecessary-rerenders',
     label: 'Unnecessary Re-renders',
     description: "Components re-rendering when they don't need to",
   },
   {
-    path: '/02',
+    path: '/docs/02-bad-state-placement',
     label: 'Bad State Placement',
     description: 'State living in the wrong part of the tree',
   },
   {
-    path: '/03',
+    path: '/docs/03-list-virtualization',
     label: 'List Virtualization',
     description: 'Rendering too many DOM nodes at once',
   },
   {
-    path: '/04',
+    path: '/docs/04-heavy-bundle',
     label: 'Heavy Bundle',
     description: 'Loading too much JavaScript upfront',
   },
   {
-    path: '/05',
+    path: '/docs/05-slow-interactions',
     label: 'Slow Interactions',
     description: 'UI feeling sluggish on user input',
   },
   {
-    path: '/06',
+    path: '/docs/06-costly-hydration',
     label: 'Costly Hydration',
     description: 'Server-side rendering hydration issues',
   },
