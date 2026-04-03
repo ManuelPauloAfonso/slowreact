@@ -13,11 +13,7 @@ export default defineConfig({
         rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]],
       }),
     },
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']],
-      },
-    }),
+    react(),
     tailwindcss(),
   ],
   resolve: {
