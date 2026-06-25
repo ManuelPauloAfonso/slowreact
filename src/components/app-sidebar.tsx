@@ -10,7 +10,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar'
-import { GithubIcon, SunIcon, MoonIcon, BookIcon } from 'lucide-react'
+import { GithubIcon, SunIcon, MoonIcon, BookIcon, PlayIcon } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { useState } from 'react'
 
@@ -73,12 +73,19 @@ export function AppSidebar() {
           </SidebarGroupLabel>
           <SidebarMenu>
             {exercises.map((ex) => (
-              <SidebarMenuItem key={ex.path}>
-                <SidebarMenuButton asChild>
+              <SidebarMenuItem key={ex.path} className="flex items-center">
+                <SidebarMenuButton asChild className="flex-1">
                   <Link to={ex.path} className="font-mono text-sm">
                     {ex.label}
                   </Link>
                 </SidebarMenuButton>
+                <Link
+                  to={ex.path.replace('/docs/', '/problems/')}
+                  title="Open live exercise"
+                  className="text-muted-foreground hover:text-orange-500 transition-colors px-2"
+                >
+                  <PlayIcon className="size-3.5" />
+                </Link>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>

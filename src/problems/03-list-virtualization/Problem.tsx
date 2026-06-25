@@ -1,10 +1,6 @@
-import type { Item } from '@/types/Item'
+import { items } from '@/mocks/items'
 
-interface Props {
-  items: Item[]
-}
-
-export default function ListVirtualization({ items }: Props) {
+export default function ListVirtualization() {
   return (
     <ul>
       {items.map((item) => (
